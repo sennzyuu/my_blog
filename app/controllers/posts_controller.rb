@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
   def index
+    @posts = Post.all
+    @new_posts = Post.all
+    @author = Author.first
   end
 
   def show
     @post = Post.find(params[:id])
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
   def new
@@ -18,8 +21,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id])     
   end
+
+  # なぜ.editメソッドではないのか??
 
   def update
     @post = Post.find(params[:id])
