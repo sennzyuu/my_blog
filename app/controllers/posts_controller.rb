@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
-    @posts = Post.all
-    @new_posts = Post.all
+    @posts = Post.order(created_at: :desc)
+    @new_posts = Post.order(created_at: :desc).limit(5)
     @author = Author.first
   end
 
   def show
-    set_post
+    
   end
 
   def new
@@ -20,20 +21,17 @@ class PostsController < ApplicationController
   end
 
   def edit
-    set_post   
+    
   end
 
   # なぜ.editメソッドではないのか??
 
   def update
-    set_post
     @post.update(post_params)
-    byebug
     redirect_to @post
   end
 
   def destroy
-    set_post
     @post.destroy
     redirect_to posts_path
   end
